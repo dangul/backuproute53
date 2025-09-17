@@ -72,20 +72,23 @@ Resources:
 
               lines = []
 
-              # Hantera ALIAS
+              # ALIAS
               if "AliasTarget" in record:
                   target = record["AliasTarget"]["DNSName"].rstrip(".")
+
                   # Bind format doesn't have ALIAS; we write a comment + pseudo-line for readable backup
                   lines.append(f"; ALIAS {name} -> {target} ({record_type})")
+
                   # Choose a default TTL for backup text (doesn't affect Route 53)
                   alias_ttl = ttl if ttl is not None else 60
                   lines.append(f"{name}. {alias_ttl} IN {record_type} {target} ; alias")
                   return "\n".join(lines)
 
-              # Vanliga poster med ResourceRecords
+              #  ResourceRecords
               values = [r["Value"] for r in record.get("ResourceRecords", [])]
+
               # Some special records may lack values; skip empty ones
-              if not values and record_type not in ("NS", "SOA"):  # NS/SOA bör ha värden
+              if not values and record_type not in ("NS", "SOA"):
                   return ""
 
               ttl_str = str(ttl) if ttl is not None else "60"
@@ -95,11 +98,9 @@ Resources:
               return "\n".join(lines)
 
           def backup_zone(zone, date_str, bucket_name):
-              # Egen klient per tråd är okej i Lambda
               route53_client = boto3.client("route53")
               s3_client = boto3.client("s3")
 
-              # Ta bort ev. prefix
               raw_zone_id = zone["Id"]
               zone_id = raw_zone_id.split("/")[-1]
               zone_name = zone["Name"]
