@@ -17,4 +17,4 @@ S3BucketName = Route53Zones
 DestinationKMS = arn:aws:kms:eu-north-1:xxxxxxxxxxxx:key/11111111-2222-3333-4444-555555555555  
 ScheduleExpression = cron(15 3 * * ? *)  
 
-Note :warning: Don´t forgett to create your S3 bucket before deploy stack!  
+Note :warning: Don´t forget to create your S3 bucket before deploy stack!  
