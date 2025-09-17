@@ -10,6 +10,10 @@ Parameters:
   DestinationKMS:
     Type: String
     Description: 'The arn for the KMS key on the destination account'
+  ExpireLog:
+    Type: String
+    Description: 'Expire CloudWatch log after (days)'
+    Default: '14'
 
 Resources:
   BackupFunctionRole:
@@ -203,7 +207,7 @@ Resources:
     Type: 'AWS::Logs::LogGroup'
     Properties:
       LogGroupName: !Sub '/aws/lambda/${BackupFunction}'
-      RetentionInDays: 14
+      RetentionInDays: !Ref ExpireLog
 
   FailedBackupMetricFilter:
     Type: 'AWS::Logs::MetricFilter'
