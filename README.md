@@ -4,6 +4,7 @@ This cloudformation template creates
 * Lambda with python 3.13 code to backup all route53 zones in a account
 * EventBridge rule to trigger Lambda
 * CloudWatch log group to monitor process
+* IAM policy & role with least privileges 
 
 ### Stack details:  
 
