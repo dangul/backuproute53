@@ -11,7 +11,7 @@ This cloudformation template creates
 **DestinationKMS** - KMS key (arn) for S3 bucket
 **ScheduleExpression** - Cron expression when Lambda should be triggered
 
-**Example**: 
+**Example** :
 S3BucketName = Route53Zones 
 DestinationKMS = arn:aws:kms:eu-north-1:xxxxxxxxxxxx:key/11111111-2222-3333-4444-555555555555 
 ScheduleExpression = cron(15 3 * * ? *) 
