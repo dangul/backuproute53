@@ -199,6 +199,23 @@ Resources:
       Principal: 'events.amazonaws.com'
       SourceArn: !GetAtt BackupFunctionTrigger.Arn
 
+  BackupFunctionLogGroup:
+    Type: 'AWS::Logs::LogGroup'
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${BackupFunction}'
+      RetentionInDays: 14
+
+  FailedBackupMetricFilter:
+    Type: 'AWS::Logs::MetricFilter'
+    Properties:
+      LogGroupName: !Ref BackupFunctionLogGroup
+      FilterPattern: '?failed'
+      MetricTransformations:
+        - MetricNamespace: 'Route53Backup'
+          MetricName: 'FailedBackups'
+          MetricValue: '1'
+          DefaultValue: 0
+
 Outputs:
   BackupFunctionArn:
     Description: 'ARN of the backup Lambda function'
