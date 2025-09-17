@@ -1,2 +1,2 @@
 # backuproute53
-Cloudformation template for backuing up route53 all zones
+Cloudformation template for backing up route53 all zones
