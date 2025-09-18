@@ -4,6 +4,7 @@ This cloudformation template creates
 * Lambda with python 3.13 code to backup all route53 zones in a account
 * EventBridge rule to trigger Lambda
 * CloudWatch log group to monitor process
+* CloudWatch metric FailedBackups (All->Route53Backup->Metrix with no dimensions->FailedBackups)  
 * IAM policy & role with least privileges 
 
 ### Stack details:  
@@ -17,6 +18,7 @@ S3BucketName = Route53Zones
 DestinationKMS = arn:aws:kms:eu-north-1:xxxxxxxxxxxx:key/11111111-2222-3333-4444-555555555555  
 ScheduleExpression = cron(15 3 * * ? *)  
 
-Note :warning:  
+Note :warning: :warning: :warning:  
 -> Don´t forget to create your S3 bucket before deploy stack!  
--> Create lifcycle rule to remove old backups (example remove older backupfiles that 30 days)
+-> Create lifcycle rule to remove old backups (example remove older backupfiles that 30 days)  
+-> Create CloudWatch Alarms to for example sen mail to SNS topic
