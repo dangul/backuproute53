@@ -12,11 +12,13 @@ This cloudformation template creates
 **S3BucketName** - Bucket to store route53 zones  
 **DestinationKMS** - KMS key (arn) for S3 bucket  
 **ScheduleExpression** - Cron expression when Lambda should be triggered  
+**ExpireLog** - Expire CloudWatch log after (days)  
 
 **Example** :  
 S3BucketName = Route53Zones  
 DestinationKMS = arn:aws:kms:eu-north-1:xxxxxxxxxxxx:key/11111111-2222-3333-4444-555555555555  
 ScheduleExpression = cron(15 3 * * ? *)  
+ExpireLog = 30  
 
 Note :warning: :warning: :warning:  
 -> Don´t forget to create your S3 bucket before deploy stack!  
